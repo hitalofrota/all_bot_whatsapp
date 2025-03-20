@@ -1,5 +1,6 @@
 const venom = require('venom-bot');
 const venomConfig = require('../config/venomConfig');
+const { askChatGPT } = require('./chatService');
 
 let clientInstance = null;
 
@@ -21,6 +22,27 @@ async function initializeVenom() {
     });
 
     console.log("✅ Venom iniciado com sucesso!");
+
+    clientInstance.onMessage(async (message) => {
+      console.log("📩 Mensagem recebida:", message.body);
+
+      if (!message.body || message.isGroupMsg) {
+        console.log("⏩ Mensagem ignorada (vazia ou em grupo)");
+        return;
+      }
+
+      try {
+        console.log("🧠 Enviando mensagem para ChatGPT...");
+        const resposta = await askChatGPT(message.body);
+        console.log("💬 Resposta do ChatGPT:", resposta);
+
+        await clientInstance.sendText(message.from, resposta);
+        console.log("✅ Mensagem enviada para o usuário.");
+      } catch (error) {
+        console.error("❌ Erro ao processar mensagem:", error);
+      }
+    });
+
     return clientInstance;
   } catch (error) {
     console.error("❌ Erro ao iniciar Venom:", error);

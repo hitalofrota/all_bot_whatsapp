@@ -1,6 +1,6 @@
 require('dotenv').config();
-const app = require('./app.js');
-const { initializeVenom } = require('./services/venomService.js');
+const app = require('./app');
+const { initializeVenom } = require('./services/venomService');
 
 const PORT = process.env.PORT || 3005;
 
