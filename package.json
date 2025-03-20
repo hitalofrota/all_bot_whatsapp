@@ -18,6 +18,7 @@
   "homepage": "https://github.com/hitalofrota/all_bot#readme",
   "description": "",
   "dependencies": {
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "venom-bot": "^5.3.0"
   }

@@ -5,7 +5,21 @@ let clientInstance = null;
 
 async function initializeVenom() {
   try {
-    clientInstance = await venom.create(venomConfig);
+    console.log("🔄 Verificando sessão existente...");
+
+    clientInstance = await venom.create({
+      session: venomConfig.session,
+      multidevice: venomConfig.multidevice,
+      headless: venomConfig.headless,
+      browserPath: venomConfig.browserPath,
+      executablePath: venomConfig.executablePath,
+      disableWelcome: venomConfig.disableWelcome,
+      logQR: venomConfig.logQR,
+      sessionPath: venomConfig.sessionPath,
+      autoClose: venomConfig.autoClose,
+      args: venomConfig.args
+    });
+
     console.log("✅ Venom iniciado com sucesso!");
     return clientInstance;
   } catch (error) {
