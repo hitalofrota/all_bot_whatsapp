@@ -16,5 +16,4 @@ async function sendMessage(req, res) {
     res.status(500).json({ error: "Erro ao enviar mensagem." });
   }
 }
-
 module.exports = { sendMessage };
